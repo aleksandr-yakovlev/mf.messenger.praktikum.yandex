@@ -1,0 +1,24 @@
+{
+  "name": "mf.messenger.praktikum.yandex",
+  "version": "0.0.1",
+  "description": "Проектная работа Яндекс.Практикум Мидл Фронтенд Разработчик",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aleksandr-yakovlev/mf.messenger.praktikum.yandex.git"
+  },
+  "author": "aleksandr.yakovlev@bk.ru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aleksandr-yakovlev/mf.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/aleksandr-yakovlev/mf.messenger.praktikum.yandex#readme"
+}
