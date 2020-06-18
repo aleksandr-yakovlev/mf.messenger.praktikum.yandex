@@ -5,7 +5,8 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 
 Мессенджер. Проектная работа Яндекс.Практикум мидл фронтенд разработчик.
 
-**Демо**: (https://mf-messenger.netlify.app/)
+- [Демо](https://mf-messenger.netlify.app/)
+- [Макет](https://www.figma.com/file/sliHo84YHIeYIr1kY1kY1i/Messenger-Praktikum?node-id=0%3A1)
 
 ## Этап разработки
 

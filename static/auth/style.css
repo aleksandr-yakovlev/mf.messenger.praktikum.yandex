@@ -1,0 +1,57 @@
+@import url("../theme.css");
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.auth-body {
+  background-color: var(--bakground-color-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-form {
+  background-color: #fff;
+  width: 375px;
+  height: 360px;
+  padding: 50px;
+  text-align: center;
+}
+
+.auth-form-label {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.auth-form input {
+  border: none;
+}
+
+.auth-form input[type="text"],
+input[type="password"] {
+  height: 42px;
+  background-color: var(--bakground-color-grey);
+  padding: 0px 10px;
+}
+
+.auth-form ::placeholder {
+  color: var(--text-color-grey);
+}
+
+.auth-form input[type="submit"] {
+  width: 333px;
+  height: 53px;
+  font-size: 20px;
+  background-color: var(--button-background-color);
+  color: var(--button-color);
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.auth-form a {
+  color: var(--text-color-blue);
+}
