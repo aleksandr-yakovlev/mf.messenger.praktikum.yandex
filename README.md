@@ -23,6 +23,7 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 ## **Используемые технологии**
 
 - [Express](https://expressjs.com/ru/)
+- [Express Handlebars](https://github.com/express-handlebars/express-handlebars)
 
 ## **Примеры использования**
 
