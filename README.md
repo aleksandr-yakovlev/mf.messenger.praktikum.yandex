@@ -12,7 +12,8 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 
 Проект в начале своего пути. Уже сделано:
 
-- Развернут express, сверстаны макеты основных страниц, настроен автодеплой.
+- Развернут express, сверстаны макеты основных страниц, настроен автодеплой;
+- Внедрен шаблонизатор express-handlebars, реализована валидация форм;
 
 ## Установка
 
@@ -22,6 +23,7 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 ## **Используемые технологии**
 
 - [Express](https://expressjs.com/ru/)
+- [Express Handlebars](https://github.com/express-handlebars/express-handlebars)
 
 ## **Примеры использования**
 
