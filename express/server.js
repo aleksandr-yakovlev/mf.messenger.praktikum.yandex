@@ -1,15 +1,15 @@
 const path = require("path");
 const express = require("express");
+const serverless = require("serverless-http");
 const hbs = require("express-handlebars");
-const regRoute = require("./routes/reg");
-const authRoute = require("./routes/auth");
-const chatRoute = require("./routes/chat");
-const profileRoute = require("./routes/profile");
+const regRoute = require("../routes/reg");
+const authRoute = require("../routes/auth");
+const chatRoute = require("../routes/chat");
+const profileRoute = require("../routes/profile");
 
 const app = express();
-const PORT = 4000;
 
-app.set("views", path.join(__dirname, "views/"));
+app.set("views", path.join(__dirname, "../views/"));
 app.engine(
   "hbs",
   hbs({
@@ -17,9 +17,9 @@ app.engine(
     defaultLayout: "main",
     extname: "hbs",
     helpers: {
-      button: require("./helpers/button"),
-      section: require("./helpers/section"),
-      when: require("./helpers/when"),
+      button: require("../helpers/button"),
+      section: require("../helpers/section"),
+      when: require("../helpers/when"),
     },
   })
 );
@@ -32,7 +32,7 @@ app.get("/reg", regRoute);
 app.get("/auth", authRoute);
 app.get("/profile", profileRoute);
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "../public")));
 
 app.use(function (req, res, next) {
   res.render("error", { ecode: 404, message: "Такой страницы нет" });
@@ -45,6 +45,5 @@ app.use(function (err, req, res, next) {
   });
 });
 
-app.listen(PORT, function () {
-  console.log(`App listening on port ${PORT}!`);
-});
+module.exports = app;
+module.exports.handler = serverless(app);
