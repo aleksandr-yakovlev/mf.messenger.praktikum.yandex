@@ -25,14 +25,17 @@ app.engine(
 );
 app.set("view engine", "hbs");
 
-app.use(express.static("./"));
-app.get("/main", chatRoute);
-app.get("/chat/:id", chatRoute);
-app.get("/reg", regRoute);
-app.get("/auth", authRoute);
-app.get("/profile", profileRoute);
+const router = express.Router();
+
+router.get("/main", chatRoute);
+router.get("/chat/:id", chatRoute);
+router.get("/reg", regRoute);
+router.get("/auth", authRoute);
+router.get("/profile", profileRoute);
 
 app.use(express.static(path.join(__dirname, "../public")));
+app.use("/.netlify/functions/server", router); // path must route to lambda
+app.use("/", (req, res) => res.sendFile(path.join(__dirname, "../index.html")));
 
 app.use(function (req, res, next) {
   res.render("error", { ecode: 404, message: "Такой страницы нет" });
