@@ -1,0 +1,55 @@
+.message-form {
+  height: 60px;
+  border-top: 1px solid var(--border-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.message-list {
+  width: calc(100% - 20px);
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+}
+
+.message-right {
+  width: 100%;
+  overflow: hidden;
+}
+
+.message-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.message-right p {
+  margin: 5px;
+}
+
+.main-content {
+  justify-content: flex-end;
+}
+
+.ava {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #e7a466;
+}
+
+.message-text {
+  width: 90%;
+  resize: none;
+  padding: 0;
+  outline: none;
+  border: none;
+  margin-bottom: 5px;
+}

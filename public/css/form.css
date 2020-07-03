@@ -1,49 +1,34 @@
-@import url("../theme.css");
+@import url("./theme.css");
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-.reg-body {
-  background-color: var(--bakground-color-grey);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.reg-form {
-  background-color: #fff;
+.form {
   width: 375px;
-  height: 475px;
   padding: 50px;
   text-align: center;
 }
 
-.reg-form-label {
+.form-label {
   font-weight: bold;
   font-size: 20px;
   padding-bottom: 20px;
 }
 
-.reg-form input {
+.form input {
   border: none;
 }
 
-.reg-form input[type="email"],
+.form input[type="email"],
 input[type="text"],
 input[type="password"] {
   height: 42px;
-  background-color: var(--bakground-color-grey);
+  background-color: var(--background-color-grey);
   padding: 0px 10px;
 }
 
-.reg-form ::placeholder {
+.form ::placeholder {
   color: var(--text-color-grey);
 }
 
-.reg-form input[type="submit"] {
+.form input[type="submit"] {
   width: 333px;
   height: 53px;
   font-size: 20px;
@@ -53,6 +38,10 @@ input[type="password"] {
   cursor: pointer;
 }
 
-.reg-form a {
+.form a {
   color: var(--text-color-blue);
+}
+
+.form .error {
+  border: 1px solid red;
 }
