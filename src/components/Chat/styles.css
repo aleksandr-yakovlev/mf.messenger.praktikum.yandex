@@ -1,0 +1,26 @@
+.chat {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.right-side {
+  height: 100%;
+  width: calc(100% - 350px);
+}
+
+.main-header {
+  height: 60px;
+  border-bottom: 1px solid var(--border-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-content {
+  height: calc(100% - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

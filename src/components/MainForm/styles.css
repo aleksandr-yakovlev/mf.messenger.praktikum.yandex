@@ -1,0 +1,14 @@
+@import url("../theme.css");
+
+.main-form {
+  background-color: var(--background-color-grey);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.form {
+  background-color: #fff;
+}

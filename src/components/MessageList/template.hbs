@@ -1,0 +1,22 @@
+<div class="message-list">
+    <div class="messages">
+        {{#each messages}}
+        <div class="message">
+            <div class="message-left">
+                <div class="ava"></div>
+            </div>
+            <div class="message-right">
+                <p class="message-top">{{uname}}</p>
+                <div class="message-bottom">
+                    <p class="message-text">{{text}}</p>
+                    <span class="message-timestamp">{{timestamp}}</span>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <form class="message-form">
+        <textarea id="message-text" rows="1" name="messagearea" class="message-text"
+            placeholder="Сообщение..."></textarea>
+    </form>
+</div>

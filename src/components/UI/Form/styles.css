@@ -1,0 +1,47 @@
+@import url("../../theme.css");
+
+.form {
+  width: 375px;
+  padding: 50px;
+  text-align: center;
+}
+
+.form-label {
+  font-weight: bold;
+  font-size: 20px;
+  padding-bottom: 20px;
+}
+
+.form input {
+  border: none;
+}
+
+.form input[type="email"],
+input[type="text"],
+input[type="password"] {
+  height: 42px;
+  background-color: var(--background-color-grey);
+  padding: 0px 10px;
+}
+
+.form ::placeholder {
+  color: var(--text-color-grey);
+}
+
+.form input[type="submit"] {
+  width: 333px;
+  height: 53px;
+  font-size: 20px;
+  background-color: var(--button-background-color);
+  color: var(--button-color);
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.form a {
+  color: var(--text-color-blue);
+}
+
+.form .error {
+  border: 1px solid red;
+}
