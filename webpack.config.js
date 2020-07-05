@@ -1,4 +1,5 @@
 let ExtractTextPlugin = require("extract-text-webpack-plugin");
+let HtmlWebpackPlugin = require("html-webpack-plugin");
 let path = require("path");
 
 const src = path.resolve(__dirname, "src");
@@ -35,5 +36,11 @@ module.exports = {
       },
     ],
   },
-  plugins: [new ExtractTextPlugin("bundle.css")],
+  plugins: [
+    new ExtractTextPlugin("bundle.css"),
+    new HtmlWebpackPlugin({
+      title: "mf.messenger.praktikum.yandex",
+      template: "index.html",
+    }),
+  ],
 };
