@@ -1,11 +1,12 @@
-let ExtractTextPlugin = require("extract-text-webpack-plugin");
-let HtmlWebpackPlugin = require("html-webpack-plugin");
-let path = require("path");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const autoprefixer = require("autoprefixer");
+const path = require("path");
 
-const src = path.resolve(__dirname, "src");
+const src = path.resolve(__dirname, "build");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: path.resolve(src, "index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
@@ -14,7 +15,6 @@ module.exports = {
     rules: [
       {
         test: /\.js/,
-        exclude: /node_modules/,
         loader: "babel-loader",
         exclude: /(node_modules)/,
       },
@@ -22,7 +22,15 @@ module.exports = {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
-          use: ["css-loader"],
+          use: [
+            "css-loader",
+            {
+              loader: "postcss-loader",
+              options: {
+                plugins: [autoprefixer],
+              },
+            },
+          ],
         }),
       },
       {

@@ -10,21 +10,27 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 
 ## Этап разработки
 
-Проект в начале своего пути. Уже сделано:
+Cделано:
 
 - Развернут express, сверстаны макеты основных страниц, настроен автодеплой;
 - Внедрен шаблонизатор handlebars, добавлена валидация форм, реализована сборка;
+- Добавлен EventBus
+- Тесты
+- Роутер
 
 ## Установка
 
 - `npm install` — установка стабильной версии,
 - `npm start` — запуск версии для разработчика.
-- `npm build` — прод сборка приложения.
+- `npm run build` — прод сборка приложения.
+- `npm run test` — запуск тестов.
 
 ## **Используемые технологии**
 
 - [Express](https://expressjs.com/ru/)
 - [Handlebars](https://handlebarsjs.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Jest](https://jestjs.io/)
 
 ## **Примеры использования**
 
