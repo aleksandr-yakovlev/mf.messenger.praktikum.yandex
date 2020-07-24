@@ -1,12 +1,10 @@
-<form class="form" id="form">
-    <p class="form-label">{{ label }}</p>
-    {{#each inputs}}
-    <p><input name='{{name}}' type={{type}} size={{size}} {{#if required}} required {{/if}}
-            placeholder='{{placeholder}}' {{#if pattern}} pattern={{pattern}} {{/if}} />
-    </p>
-    {{/each}}
-    <p>{{button submit}}</p>
-    {{#if link}}
-    <p><a href={{link.url}}>{{link.label}}</a></p>
-    {{/if}}
-</form>
+<p class="form-label">{{ label }}</p>
+{{#each inputs}}
+<p><input name='{{name}}' type={{type}} size={{size}} {{#if required}} required {{/if}} placeholder='{{placeholder}}'
+        {{#if pattern}} pattern={{pattern}} {{/if}} />
+</p>
+{{/each}}
+<p>{{button submit}}</p>
+{{#if link}}
+<p><a href={{link.url}}>{{link.label}}</a></p>
+{{/if}}
