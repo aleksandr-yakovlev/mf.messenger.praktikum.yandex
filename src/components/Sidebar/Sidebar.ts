@@ -1,22 +1,24 @@
 import { Block } from "../../modules/Block";
-const template = require("./template.hbs");
+
 import "./styles.css";
 
+const template = require("./template.hbs");
+
+interface ISidebar {
+  chats?: {}[];
+  chatHandler?: (id: string) => void;
+}
+
 class Sidebar extends Block {
-  constructor(props?: { chats?: {}[]; chatHandler?: (id: string) => void }) {
+  constructor(props?: ISidebar) {
     super(props, { tagName: "aside", className: "main-sidebar" });
   }
   componentDidMount() {
     const { chatHandler } = this.props;
     if (chatHandler) {
       let elements = this.getContent().getElementsByClassName("main-chat-card");
-      for (var i = 0; i < elements.length; i++) {
-        (function (index) {
-          elements[index].addEventListener(
-            "click",
-            chatHandler(elements[index].id)
-          );
-        })(i);
+      for (let i = 0; i < elements.length; i++) {
+        elements[i].addEventListener("click", chatHandler(elements[i].id));
       }
     }
   }
