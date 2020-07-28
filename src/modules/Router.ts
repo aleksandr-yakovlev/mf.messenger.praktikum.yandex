@@ -7,21 +7,26 @@ interface IBlock {
 }
 
 export class Router {
-  static __instance: Router;
   routes: Route[];
-  _currentRoute: Route;
-  _rootQuery: string;
-  _prev: Route;
-  constructor(rootQuery: string) {
-    if (Router.__instance) {
-      return Router.__instance;
-    }
+  private _currentRoute: Route;
+  private _rootQuery: string;
+  private _prev: Route;
+  private static __instance: Router;
+  private constructor(rootQuery: string) {
     window.addEventListener("hashchange", () => this._onRoute());
     this.routes = [];
     this._currentRoute = null;
     this._rootQuery = rootQuery;
     this._prev = null;
     Router.__instance = this;
+  }
+
+  public static getInstance(rootQuery: string): Router {
+    if (!Router.__instance) {
+      Router.__instance = new Router(rootQuery);
+    }
+
+    return Router.__instance;
   }
 
   start() {

@@ -34,7 +34,7 @@
   "scripts": {
     "cp": "tsc && ncp src build --filter='.*(?<!\\.ts)$'",
     "build:prod": "npm run cp && webpack --mode=production",
-    "build:dev": "npm run cp && webpack --mode=development && node --inspect server.js",
+    "build:dev": "npm run cp && webpack --mode=development && node --inspect ./build/server.js",
     "start": "nodemon --watch src --ext 'ts' --exec npm run build:dev",
     "test": "jest"
   },

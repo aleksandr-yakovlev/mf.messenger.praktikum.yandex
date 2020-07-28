@@ -1,9 +1,16 @@
 import { Block } from "../../modules/Block";
-const template = require("./template.hbs");
+
 import "./styles.css";
 
+const template = require("./template.hbs");
+
+interface IError {
+  ecode: number;
+  emessage: string;
+}
+
 class Error extends Block {
-  constructor(props: { ecode: number; emessage: string }) {
+  constructor(props: IError) {
     super(props, { tagName: "div", className: "error-page" });
   }
   render() {
