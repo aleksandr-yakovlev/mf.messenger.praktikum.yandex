@@ -8,11 +8,15 @@ enum Events {
   FLOW_RENDER = "flow:render",
 }
 
+type children = { query: string; block: Block };
+
+interface IBlockProps {
+  childrens?: children[];
+  [key: string]: any;
+}
+
 export class Block {
-  props: {
-    childrens?: { query: string; block: Block }[];
-    [key: string]: any;
-  }; //ProxyConstructor;
+  props: IBlockProps;
   eventBus: () => EventBus;
   static EVENTS = Events;
 
@@ -99,7 +103,7 @@ export class Block {
       this._element.innerHTML = block;
     }
     const { childrens } = this.props;
-    if (childrens) {
+    if ((childrens || []).length > 0) {
       childrens.forEach((children) => {
         render(children.query, children.block, this._element);
       });
@@ -114,8 +118,6 @@ export class Block {
   }
 
   private _makePropsProxy(props) {
-    // Можно и так передать this
-    // Такой способ больше не применяется с приходом ES6+
     const self = this;
 
     return new Proxy(props, {

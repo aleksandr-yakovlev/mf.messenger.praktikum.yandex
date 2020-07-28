@@ -1,9 +1,10 @@
 export const queryStringify = (obj: object): string => {
+  let params = new URLSearchParams();
   let pairs: string[] = [];
 
   for (const [key, value] of Object.entries(obj)) {
-    pairs.push(`${key}=${value}`);
+    params.append(key, value);
   }
 
-  return pairs.join("&");
+  return params.toString();
 };

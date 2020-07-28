@@ -1,6 +1,8 @@
 import { Block } from "../../modules/Block";
-const template = require("./template.hbs");;
+
 import "./styles.css";
+
+const template = require("./template.hbs");
 
 class MessageList extends Block {
   constructor(props?) {
