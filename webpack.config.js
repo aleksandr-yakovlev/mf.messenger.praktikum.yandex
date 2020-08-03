@@ -1,5 +1,6 @@
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const autoprefixer = require("autoprefixer");
 const path = require("path");
 
@@ -9,7 +10,7 @@ module.exports = {
   entry: path.resolve(src, "index.ts"),
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js",
+    filename: "[name].[hash].bundle.js",
   },
   devServer: {
     contentBase: "dist",
@@ -54,11 +55,19 @@ module.exports = {
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
+},
   plugins: [
-    new ExtractTextPlugin("bundle.css"),
+    new ExtractTextPlugin({filename: 'style.[hash].bundle.css', disable: false, allChunks: true}),
     new HtmlWebpackPlugin({
+      inject: false,
+      hash: true,
       title: "mf.messenger.praktikum.yandex",
       template: "index.html",
     }),
+    new CleanWebpackPlugin(),
   ],
 };
