@@ -3,19 +3,29 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 const path = require("path");
 
-const src = path.resolve(__dirname, "build");
+const src = path.resolve(__dirname, "src");
 
 module.exports = {
-  entry: path.resolve(src, "index.js"),
+  entry: path.resolve(src, "index.ts"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
   },
+  devServer: {
+    contentBase: "dist",
+    compress: true,
+    port: 3000,
+    hot: true,
+    open: true,
+  },
+  resolve: {
+    extensions: [".ts", ".js", ".json"],
+  },
   module: {
     rules: [
       {
-        test: /\.js/,
-        loader: "babel-loader",
+        test: /\.ts$/,
+        loader: "ts-loader",
         exclude: /(node_modules)/,
       },
       {

@@ -2,7 +2,6 @@
   "name": "mf.messenger.praktikum.yandex",
   "version": "0.0.1",
   "description": "Проектная работа Яндекс.Практикум Мидл Фронтенд Разработчик",
-  "main": "server.js",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.10.4",
@@ -11,31 +10,28 @@
     "@types/jest": "^26.0.7",
     "autoprefixer": "^9.8.5",
     "babel-jest": "^26.1.0",
-    "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "css-loader": "^3.6.0",
-    "express": "^4.17.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "handlebars": "^4.7.6",
     "handlebars-jest": "^0.5.0",
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^26.1.0",
+    "jest-handlebars": "^1.0.1",
     "jest-transform-css": "^2.0.0",
-    "ncp": "^2.0.0",
-    "nodemon": "^2.0.4",
     "postcss-loader": "^3.0.0",
     "style-loader": "^1.2.1",
     "ts-jest": "^26.1.3",
+    "ts-loader": "^8.0.1",
     "typescript": "^3.9.7",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "cp": "tsc && ncp src build --filter='.*(?<!\\.ts)$'",
-    "build:prod": "npm run cp && webpack --mode=production",
-    "build:dev": "npm run cp && webpack --mode=development && node --inspect ./build/server.js",
-    "start": "nodemon --watch src --ext 'ts' --exec npm run build:dev",
+    "build:prod": "webpack --mode=production",
+    "start": "webpack-dev-server",
     "test": "jest"
   },
   "jest": {
@@ -54,9 +50,19 @@
       }
     },
     "preset": "ts-jest",
+    "modulePaths": [
+      "./src/utils",
+      "./node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "ts",
+      "hbs"
+    ],
     "transform": {
       "^.+\\.js?$": "babel-jest",
-      "^.+\\.hbs$": "<rootDir>/node_modules/handlebars-jest",
+      "^.+\\.ts?$": "ts-jest",
+      "^.+\\.hbs$": "<rootDir>/src/utils/pre4.ts",
       ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     }
   },

@@ -3,7 +3,6 @@ import { Sidebar } from "./Sidebar";
 describe("components/Sidebar", () => {
   it("должен создавать DOM элемент", () => {
     const Sdbar = new Sidebar();
-    console.log(Sdbar);
   });
 });
 

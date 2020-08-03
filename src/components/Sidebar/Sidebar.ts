@@ -24,6 +24,7 @@ class Sidebar extends Block {
   }
   render() {
     const { chats } = this.props;
+    //  console.log(template, );
     return template({ chats });
   }
 }
