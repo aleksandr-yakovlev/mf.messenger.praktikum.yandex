@@ -5,7 +5,11 @@
     "outDir": "build",
     "rootDir": "src",
     "skipLibCheck": true,
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"],
+    }
   },
   "exclude": ["node_modules"],
   "esModuleInterop": true

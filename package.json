@@ -32,7 +32,8 @@
   "scripts": {
     "build:prod": "webpack --mode=production",
     "start": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "test:clear": "jest --clearCache"
   },
   "jest": {
     "globals": {
@@ -52,7 +53,8 @@
     "preset": "ts-jest",
     "modulePaths": [
       "./src/utils",
-      "./node_modules"
+      "./node_modules",
+      "<rootDir>/src"
     ],
     "moduleFileExtensions": [
       "js",
@@ -62,7 +64,7 @@
     "transform": {
       "^.+\\.js?$": "babel-jest",
       "^.+\\.ts?$": "ts-jest",
-      "^.+\\.hbs$": "<rootDir>/src/utils/pre4.ts",
+      "^.+\\.hbs$": "<rootDir>/src/utils/pre.ts",
       ".+\\.(css|styl|less|sass|scss)$": "jest-transform-css"
     }
   },

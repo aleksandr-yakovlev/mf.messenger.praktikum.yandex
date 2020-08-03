@@ -3,7 +3,7 @@
 </header>
 <ul class="main-chats">
     {{#each chats}}
-    <li class="main-chat-card{{#when ../selected 'eq' id}} selected{{/when}}" id={{id}}></li>
+    <li class="main-chat-card{{#when ../selected 'eq' id}} selected{{/when}}" id={{id}}>
     <div class="main-ava-img"></div>
     <div class="main-chat-card-right">
         <p class="main-chat-card-title">{{title}}</p>
