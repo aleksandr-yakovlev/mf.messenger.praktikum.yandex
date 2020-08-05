@@ -85,6 +85,7 @@ export class Block {
     }
 
     Object.assign(this.props, nextProps);
+    return this._element;
   };
 
   get element() {

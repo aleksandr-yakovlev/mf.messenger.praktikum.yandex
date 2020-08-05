@@ -78,13 +78,16 @@ const messages = {
 export class ChatPage extends Block {
   render() {
     const MsgList = new MessageList();
+    const Sdbr = new Sidebar();
     const Layout = new ChatLayout({
       childrens: [
         {
           query: "#sidebar",
-          block: new Sidebar({
-            chatHandler: (id) => () =>
-              MsgList.setProps({ messages: messages[id] }),
+          block: Sdbr.setProps({
+            chatHandler: (id) => () => {
+              MsgList.setProps({ messages: messages[id] });
+              // Sdbr.setProps({ selected: id });
+            },
             ...sidebarCtx,
           }),
         },

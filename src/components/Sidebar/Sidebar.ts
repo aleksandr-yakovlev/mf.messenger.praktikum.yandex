@@ -6,6 +6,7 @@ const template = require("./template.hbs");
 
 interface ISidebar {
   chats?: {}[];
+  selected?: string;
   chatHandler?: (id: string) => void;
 }
 
@@ -23,8 +24,8 @@ class Sidebar extends Block {
     }
   }
   render() {
-    const { chats } = this.props;
-    return template({ chats });
+    const { chats, selected } = this.props;
+    return template({ chats, selected });
   }
 }
 

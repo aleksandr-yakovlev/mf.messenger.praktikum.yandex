@@ -1,6 +1,8 @@
 [![Netlify
 Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b35b/deploy-status)](https://app.netlify.com/sites/mf-messenger/deploys)
 
+[![Heroku](http://heroku-badge.herokuapp.com/?app=mf-messenger-praktikum-yandex&style=flat&svg=1)]
+
 ## Описание
 
 Мессенджер. Проектная работа Яндекс.Практикум мидл фронтенд разработчик.
