@@ -41,7 +41,7 @@ const ctx = {
 };
 
 export class RegPage extends Block {
-  render() {
+  render(): HTMLElement {
     const Layout = new MainFormLayout();
     const LoginForm = new Form(ctx);
     Layout.getContent()

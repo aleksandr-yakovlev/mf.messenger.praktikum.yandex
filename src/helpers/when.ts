@@ -16,6 +16,5 @@ module.exports = (
     },
   };
   const result = operators[operator](v1, v2);
-  console.log(result);
   return result ? options.fn(this) : options.inverse(this);
 };

@@ -1,4 +1,7 @@
 {
+
+
+
   "parser": "@typescript-eslint/parser",
   "plugins": ["@typescript-eslint"],
   "extends": [
@@ -11,6 +14,10 @@
     "no-underscore-dangle": "off",
     "no-alert": "off",
     "no-console": "off",
+    "class-methods-use-this":"off",
+    "@typescript-eslint/no-empty-function":"off",
+    "@typescript-eslint/no-this-alias":"off",
+    "@typescript-eslint/no-explicit-any":"off",
     "import/extensions": [
       "error",
       "ignorePackages",

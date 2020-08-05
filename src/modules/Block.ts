@@ -5,6 +5,7 @@ enum Events {
   INIT = "init",
   FLOW_CDM = "flow:component-did-mount",
   FLOW_CDU = "flow:component-did-update",
+  FLOW_SCU = "flow:should-component-update",
   FLOW_RENDER = "flow:render",
 }
 
@@ -17,10 +18,13 @@ interface IBlockProps {
 
 export class Block {
   props: IBlockProps;
+
   eventBus: () => EventBus;
+
   static EVENTS = Events;
 
   _element = null;
+
   _meta = null;
 
   constructor(
@@ -47,6 +51,7 @@ export class Block {
   private _registerEvents(eventBus) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_SCU, this._shouldComponentUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
   }
@@ -56,7 +61,7 @@ export class Block {
     this._element = this._createDocumentElement(attributes);
   }
 
-  init() {
+  init():void {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
@@ -66,38 +71,42 @@ export class Block {
     this.componentDidMount();
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  componentDidMount() {}
+  componentDidMount():void {}
 
-  private _componentDidUpdate(oldProps, newProps) {
-    const response = this.componentDidUpdate(oldProps, newProps);
-    if (response) this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  private _componentDidUpdate() {
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.componentDidUpdate();
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps, newProps) {
+  componentDidUpdate():void {}
+
+  private _shouldComponentUpdate() {
+    const response = this.shouldComponentUpdate();
+    if (response) {
+      this.eventBus().emit(Block.EVENTS.FLOW_CDU);
+    }
+  }
+
+  shouldComponentUpdate():boolean {
     return true;
   }
 
-  setProps = (nextProps) => {
+  setProps(nextProps:IBlockProps):void  {
+
     if (!nextProps) {
       return;
     }
 
     Object.assign(this.props, nextProps);
-    return this._element;
-  };
 
-  get element() {
+  }
+
+  get element():HTMLElement {
     return this._element;
   }
 
   private _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напиши свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы превращать из возвращать из compile DOM-ноду
     if (typeof block === "object") {
       this._element.appendChild(block);
     } else {
@@ -111,10 +120,9 @@ export class Block {
     }
   }
 
-  // Может переопределять пользователь, необязательно трогать
-  render() {}
+  render():void {}
 
-  getContent() {
+  getContent():HTMLElement  {
     return this.element;
   }
 
@@ -134,8 +142,9 @@ export class Block {
         if (prop.indexOf("_") === 0) {
           throw new Error("Нет прав");
         }
-        target[prop] = value;
-        self.eventBus().emit(Block.EVENTS.FLOW_CDU);
+        const tget = target;
+        tget[prop] = value;
+        self.eventBus().emit(Block.EVENTS.FLOW_SCU);
         return true;
       },
       deleteProperty() {
@@ -144,18 +153,18 @@ export class Block {
     });
   }
 
-  _createDocumentElement(attributes) {
-    let element = document.createElement(attributes.tagName);
+  _createDocumentElement(attributes:{className:string,id:string,tagName:string}):HTMLElement {
+    const element = document.createElement(attributes.tagName);
     if (attributes.className) element.className = attributes.className;
     if (attributes.id) element.className = attributes.id;
     return element;
   }
 
-  show() {
+  show():void {
     this.getContent().style.display = "block";
   }
 
-  hide() {
+  hide():void {
     this.getContent().style.display = "none";
   }
 }

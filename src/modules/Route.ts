@@ -1,7 +1,10 @@
 import { isEqual } from "../utils/isEqual";
 import { render } from "../utils/render";
 
-type ClassRef = new (attributes: {}, props: {}) => IBlock;
+type ClassRef = new (
+  attributes: Record<string, unknown>,
+  props: Record<string, unknown>
+) => IBlock;
 
 interface IBlock {
   hide: () => void;
@@ -11,9 +14,13 @@ interface IBlock {
 
 export class Route {
   _pathname: string;
+
   _blockClass: ClassRef;
+
   _block: IBlock;
+
   _props: Record<string, any>;
+
   constructor(pathname: string, view: ClassRef, props: Record<string, any>) {
     this._pathname = pathname;
     this._blockClass = view;
@@ -21,24 +28,24 @@ export class Route {
     this._props = props;
   }
 
-  navigate(pathname: string) {
+  navigate(pathname: string): void {
     if (this.match(pathname)) {
       this._pathname = pathname;
       this.render();
     }
   }
 
-  leave() {
+  leave(): void {
     if (this._block) {
       this._block.hide();
     }
   }
 
-  match(pathname) {
+  match(pathname: string): boolean {
     return isEqual(pathname, this._pathname);
   }
 
-  render() {
+  render(): void {
     if (!this._block) {
       const { rootQuery, ...restProps } = this._props;
 

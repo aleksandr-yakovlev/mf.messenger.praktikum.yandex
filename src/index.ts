@@ -7,15 +7,14 @@ import { ProfilePage } from "./pages/Profile";
 import { Router } from "./modules/Router";
 import "./styles.css";
 
+const router = Router.getInstance("#root");
+
 class Index extends Block {
-  constructor() {
-    super();
-  }
   render() {
-    let ul = document.createElement("ul");
+    const ul = document.createElement("ul");
     ul.classList.add("link");
     router.routes.forEach((route) => {
-      let li = document.createElement("li");
+      const li = document.createElement("li");
       li.innerText = route._pathname;
       li.onclick = () => {
         router.go(route._pathname);
@@ -25,8 +24,6 @@ class Index extends Block {
     return ul;
   }
 }
-
-const router = Router.getInstance("#root");
 
 router
   .use("/", Index)

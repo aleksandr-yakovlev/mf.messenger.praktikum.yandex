@@ -2,7 +2,9 @@ import { METHODS } from "./const";
 import { queryStringify } from "./queryStringify";
 
 interface transportFunc {
-  (url: string, options: object): Promise<object>;
+  (url: string, options: Record<string, unknown>): Promise<
+    Record<string, unknown> | XMLHttpRequest
+  >;
 }
 
 export class HTTP {
@@ -25,26 +27,31 @@ export class HTTP {
     return this.request(url, { ...options, method: METHODS.DELETE });
   };
 
-  request = (url: string, options: { [key: string]: any; method: METHODS }) => {
+  request = (
+    url: string,
+    options: { [key: string]: any; method: METHODS }
+  ): Promise<Record<string, unknown> | XMLHttpRequest> => {
     const { method, data } = options;
 
-    return new Promise<object>((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.open(method, url);
+    return new Promise<Record<string, unknown> | XMLHttpRequest>(
+      (resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open(method, url);
 
-      xhr.onload = function () {
-        resolve(xhr);
-      };
+        xhr.onload = () => {
+          resolve(xhr);
+        };
 
-      xhr.onabort = reject;
-      xhr.onerror = reject;
-      xhr.ontimeout = reject;
+        xhr.onabort = reject;
+        xhr.onerror = reject;
+        xhr.ontimeout = reject;
 
-      if (method === METHODS.GET || !data) {
-        xhr.send();
-      } else {
-        xhr.send(JSON.stringify(data));
+        if (method === METHODS.GET || !data) {
+          xhr.send();
+        } else {
+          xhr.send(JSON.stringify(data));
+        }
       }
-    });
+    );
   };
 }

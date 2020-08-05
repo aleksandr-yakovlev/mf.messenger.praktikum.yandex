@@ -44,7 +44,12 @@
     "start": "webpack-dev-server",
     "test": "jest",
     "test:clear": "jest --clearCache",
-    "lint": "eslint './src/**/*.ts' "
+    "lint:all": "eslint ./src/**/*.ts "
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test && npm run lint:all"
+    }
   },
   "jest": {
     "globals": {

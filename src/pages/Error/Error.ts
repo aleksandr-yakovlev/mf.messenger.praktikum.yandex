@@ -5,7 +5,8 @@ export class ErrorPage extends Block {
   constructor(props: { ecode: number } = { ecode: 500 }) {
     super(props);
   }
-  render() {
+
+  render(): HTMLElement {
     const code = {
       404: {
         message: "Такой страницы нет",
@@ -16,7 +17,7 @@ export class ErrorPage extends Block {
     };
     const { ecode } = this.props;
     return new Error({
-      ecode: ecode,
+      ecode,
       emessage: code[ecode].message,
     }).getContent();
   }
