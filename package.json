@@ -44,7 +44,8 @@
     "start": "webpack-dev-server",
     "test": "jest",
     "test:clear": "jest --clearCache",
-    "lint:all": "eslint ./src/**/*.ts "
+    "lint:all": "eslint ./src/**/*.ts",
+    "surge": "surge -p ./public -d mf-messenger-praktikum-yandex.surge.sh"
   },
   "husky": {
     "hooks": {
