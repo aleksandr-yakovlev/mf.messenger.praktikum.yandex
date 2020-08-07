@@ -76,21 +76,31 @@ const messages = {
 };
 
 export class ChatPage extends Block {
-  render():HTMLElement {
+  componentDidMount(): void {
+    console.log("!!!!!!");
+    if (this.props.login) alert(this.props.login);
+  }
+
+  // componentDidUpdate(): void {
+  //   console.log("!!!!!!");
+  //   if (this.props.login) alert(this.props.login);
+  // }
+
+  render(): HTMLElement {
     const MsgList = new MessageList();
     const Sdbr = new Sidebar({
-      chatHandler: (id,self) => () => {
+      chatHandler: (id, self) => () => {
         MsgList.setProps({ messages: messages[id] });
-        self.setProps({selected:id});
+        self.setProps({ selected: id });
       },
-      
+
       ...sidebarCtx,
     });
     const Layout = new ChatLayout({
       childrens: [
         {
           query: "#sidebar",
-          block: Sdbr
+          block: Sdbr,
         },
         {
           query: "#main-content",

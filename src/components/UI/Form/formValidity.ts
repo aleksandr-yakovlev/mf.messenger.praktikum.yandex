@@ -8,10 +8,7 @@ const getCustomValidity = (input: HTMLInputElement): string => {
   return (input.value && message[input.pattern]) || "Необходимо заполнить";
 };
 
-const validatePassword = (
-  pwd: HTMLInputElement,
-  confirmPwd: HTMLInputElement
-): void => {
+const validatePassword = (pwd: HTMLInputElement, confirmPwd: HTMLInputElement): void => {
   if (confirmPwd.value !== pwd.value) {
     confirmPwd.setCustomValidity("Пароли не совпадают");
     confirmPwd.classList.add("error");

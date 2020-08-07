@@ -61,7 +61,7 @@ export class Block {
     this._element = this._createDocumentElement(attributes);
   }
 
-  init():void {
+  init(): void {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
@@ -71,14 +71,14 @@ export class Block {
     this.componentDidMount();
   }
 
-  componentDidMount():void {}
+  componentDidMount(): void {}
 
   private _componentDidUpdate() {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     this.componentDidUpdate();
   }
 
-  componentDidUpdate():void {}
+  componentDidUpdate(): void {}
 
   private _shouldComponentUpdate() {
     const response = this.shouldComponentUpdate();
@@ -87,21 +87,19 @@ export class Block {
     }
   }
 
-  shouldComponentUpdate():boolean {
+  shouldComponentUpdate(): boolean {
     return true;
   }
 
-  setProps(nextProps:IBlockProps):void  {
-
+  setProps(nextProps: IBlockProps): void {
     if (!nextProps) {
       return;
     }
 
     Object.assign(this.props, nextProps);
-
   }
 
-  get element():HTMLElement {
+  get element(): HTMLElement {
     return this._element;
   }
 
@@ -120,9 +118,9 @@ export class Block {
     }
   }
 
-  render():void {}
+  render(): void {}
 
-  getContent():HTMLElement  {
+  getContent(): HTMLElement {
     return this.element;
   }
 
@@ -153,18 +151,22 @@ export class Block {
     });
   }
 
-  _createDocumentElement(attributes:{className:string,id:string,tagName:string}):HTMLElement {
+  _createDocumentElement(attributes: {
+    className: string;
+    id: string;
+    tagName: string;
+  }): HTMLElement {
     const element = document.createElement(attributes.tagName);
     if (attributes.className) element.className = attributes.className;
-    if (attributes.id) element.className = attributes.id;
+    if (attributes.id) element.id = attributes.id;
     return element;
   }
 
-  show():void {
+  show(): void {
     this.getContent().style.display = "block";
   }
 
-  hide():void {
+  hide(): void {
     this.getContent().style.display = "none";
   }
 }

@@ -1,15 +1,21 @@
 import { isEqual } from "../utils/isEqual";
 import { render } from "../utils/render";
+import { Block } from "./Block";
 
-type ClassRef = new (
-  attributes: Record<string, unknown>,
-  props: Record<string, unknown>
-) => IBlock;
+type ClassRef = new (attributes: Record<string, unknown>, props: Record<string, unknown>) => IBlock;
+
+type children = { query: string; block: Block };
+
+interface IBlockProps {
+  childrens?: children[];
+  [key: string]: any;
+}
 
 interface IBlock {
   hide: () => void;
   show: () => void;
   getContent: () => HTMLElement;
+  setProps(nextProps: IBlockProps): void;
 }
 
 export class Route {
@@ -39,6 +45,14 @@ export class Route {
     if (this._block) {
       this._block.hide();
     }
+  }
+
+  setProps(nextProps: IBlockProps): void {
+    if (!nextProps) {
+      return;
+    }
+
+    Object.assign(this._props, nextProps);
   }
 
   match(pathname: string): boolean {
