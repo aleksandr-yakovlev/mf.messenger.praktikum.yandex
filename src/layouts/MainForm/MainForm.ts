@@ -2,10 +2,10 @@ import { Block } from "../../modules/Block";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 export class MainFormLayout extends Block {
-  render() {
+  render(): string {
     return template(this.props);
   }
 }

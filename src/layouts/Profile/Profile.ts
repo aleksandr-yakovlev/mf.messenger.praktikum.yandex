@@ -2,10 +2,10 @@ import { Block } from "../../modules/Block";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 export class ProfileLayout extends Block {
-  render(context = {}) {
+  render(context = {}): string {
     return template(context);
   }
 }

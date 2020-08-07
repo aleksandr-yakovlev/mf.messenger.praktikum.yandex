@@ -6,19 +6,19 @@ import { MessageList } from "../../components/MessageList";
 const sidebarCtx = {
   chats: [
     {
-      id: 1,
+      id: "1",
       title: "Title",
       fname: "Who",
       text: "Long message very very very very very long long long long",
     },
     {
-      id: 2,
+      id: "2",
       title: "Title",
       fname: "Who",
       text: "Long message very very very very very long long long long",
     },
     {
-      id: 3,
+      id: "3",
       title: "Title",
       fname: "Who",
       text: "Long message very very very very very long long long long",
@@ -76,17 +76,31 @@ const messages = {
 };
 
 export class ChatPage extends Block {
-  render() {
+  componentDidMount(): void {
+    console.log("!!!!!!");
+    if (this.props.login) alert(this.props.login);
+  }
+
+  // componentDidUpdate(): void {
+  //   console.log("!!!!!!");
+  //   if (this.props.login) alert(this.props.login);
+  // }
+
+  render(): HTMLElement {
     const MsgList = new MessageList();
+    const Sdbr = new Sidebar({
+      chatHandler: (id, self) => () => {
+        MsgList.setProps({ messages: messages[id] });
+        self.setProps({ selected: id });
+      },
+
+      ...sidebarCtx,
+    });
     const Layout = new ChatLayout({
       childrens: [
         {
           query: "#sidebar",
-          block: new Sidebar({
-            chatHandler: (id) => () =>
-              MsgList.setProps({ messages: messages[id] }),
-            ...sidebarCtx,
-          }),
+          block: Sdbr,
         },
         {
           query: "#main-content",

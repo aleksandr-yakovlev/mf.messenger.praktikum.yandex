@@ -1,17 +1,31 @@
 import { Route } from "./Route";
+import { Block } from "./Block";
+
+type children = { query: string; block: Block };
+
+interface IBlockProps {
+  childrens?: children[];
+  [key: string]: any;
+}
 
 interface IBlock {
   hide: () => void;
   show: () => void;
   getContent: () => HTMLElement;
+  setProps(nextProps: IBlockProps): void;
 }
 
 export class Router {
   routes: Route[];
+
   private _currentRoute: Route;
+
   private _rootQuery: string;
+
   private _prev: Route;
+
   private static __instance: Router;
+
   private constructor(rootQuery: string) {
     window.addEventListener("hashchange", () => this._onRoute());
     this.routes = [];
@@ -29,11 +43,11 @@ export class Router {
     return Router.__instance;
   }
 
-  start() {
+  start(): void {
     this._onRoute();
   }
 
-  getRoute(hash: string) {
+  getRoute(hash: string): Route {
     return (
       this.routes.find((route) => route.match(hash)) ||
       this.routes.find((route) => route.match("/"))
@@ -49,7 +63,7 @@ export class Router {
     route.render();
   }
 
-  use(pathname: string, block: new () => IBlock, props?: {}) {
+  use(pathname: string, block: new () => IBlock, props?: Record<string, unknown>): Router {
     const route = new Route(pathname, block, {
       rootQuery: this._rootQuery,
       ...props,
@@ -58,15 +72,15 @@ export class Router {
     return this;
   }
 
-  go(hash: string) {
+  go(hash: string): void {
     window.location.hash = hash;
   }
 
-  back() {
+  back(): void {
     window.history.back();
   }
 
-  forward() {
+  forward(): void {
     window.history.forward();
   }
 }

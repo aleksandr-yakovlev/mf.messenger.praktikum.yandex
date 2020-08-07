@@ -1,3 +1,3 @@
-export const isEqual = (lhs: string, rhs: string) => {
+export const isEqual = (lhs: string, rhs: string): boolean => {
   return lhs === rhs;
 };

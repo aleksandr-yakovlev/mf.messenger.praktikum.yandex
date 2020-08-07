@@ -1,5 +1,5 @@
-const hbss = require("handlebars");
+import * as hbss from "handlebars";
 
-module.exports = function (title: string) {
+module.exports = (title: string) => {
   return new hbss.SafeString(`<input type="submit" value=${title}>`);
 };

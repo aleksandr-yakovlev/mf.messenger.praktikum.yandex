@@ -5,17 +5,40 @@ import { LoginPage } from "./pages/Login";
 import { RegPage } from "./pages/Reg";
 import { ProfilePage } from "./pages/Profile";
 import { Router } from "./modules/Router";
+import { HTTP } from "./utils/request";
+import { BASE_URL } from "./consts";
 import "./styles.css";
 
+const router = Router.getInstance("#root");
+
+let state = {
+  login: "login1",
+};
+
+const auth = async (body: {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+  phone: string;
+}): Promise<void> => {
+  const res = await new HTTP().post(`${BASE_URL}/auth/signup`, body);
+  if (res.status === 200) {
+    state = { ...state, login: body.login };
+    if (router.getRoute("#chat")) {
+      router.getRoute("#chat").setProps({ login: state.login });
+    }
+    router.go("#chat");
+  } else alert(res.responseText);
+};
+
 class Index extends Block {
-  constructor() {
-    super();
-  }
   render() {
-    let ul = document.createElement("ul");
+    const ul = document.createElement("ul");
     ul.classList.add("link");
     router.routes.forEach((route) => {
-      let li = document.createElement("li");
+      const li = document.createElement("li");
       li.innerText = route._pathname;
       li.onclick = () => {
         router.go(route._pathname);
@@ -26,13 +49,11 @@ class Index extends Block {
   }
 }
 
-const router = Router.getInstance("#root");
-
 router
   .use("/", Index)
-  .use("#chat", ChatPage)
+  .use("#chat", ChatPage, { login: state.login })
   .use("#login", LoginPage)
-  .use("#reg", RegPage)
+  .use("#reg", RegPage, { auth })
   .use("#profile", ProfilePage)
   .use("#error/404", ErrorPage, { ecode: 404 })
   .use("#error/500", ErrorPage, { ecode: 500 })

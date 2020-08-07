@@ -1,5 +1,5 @@
-const hbs = require("handlebars");
+import * as hbs from "handlebars";
 
-module.exports = function (html: string) {
+module.exports = (html: string) => {
   return new hbs.SafeString(html);
 };
