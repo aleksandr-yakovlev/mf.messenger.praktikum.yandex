@@ -4,11 +4,12 @@ interface eventFunc {
 
 export class EventBus {
   listeners: Record<string, (() => void)[]>;
+
   constructor() {
     this.listeners = {};
   }
 
-  on: eventFunc = function (event, callback) {
+  on: eventFunc = (event, callback) => {
     if (!this.listeners[event]) {
       this.listeners[event] = [];
     }
@@ -16,7 +17,7 @@ export class EventBus {
     this.listeners[event].push(callback);
   };
 
-  off: eventFunc = function (event, callback) {
+  off: eventFunc = (event, callback) => {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
@@ -30,9 +31,7 @@ export class EventBus {
     if (!this.listeners[event]) {
       throw new Error(`Нет события: ${event}`);
     }
-    this.listeners[event].forEach(function (
-      listener: (...args: unknown[]) => void
-    ) {
+    this.listeners[event].forEach((listener: (...args: unknown[]) => void) => {
       listener(...args);
     });
   }

@@ -56,7 +56,7 @@ const formCtx = {
 };
 
 export class ProfilePage extends Block {
-  render() {
+  render():HTMLElement {
     const Layout = new ProfileLayout();
     const ProfileForm = new Form(formCtx);
     Layout.getContent()

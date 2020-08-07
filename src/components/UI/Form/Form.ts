@@ -3,7 +3,7 @@ import { formValidity } from "./formValidity";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 type InputType = {
   name: string;
@@ -23,10 +23,12 @@ export class Form extends Block {
   constructor(props: IForm) {
     super(props, { tagName: "form", className: "form", id: "form" });
   }
-  componentDidMount() {
+
+  componentDidMount():void {
     formValidity(this._element);
   }
-  render() {
+
+  render():string {
     return template(this.props);
   }
 }

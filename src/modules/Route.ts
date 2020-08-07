@@ -1,19 +1,32 @@
 import { isEqual } from "../utils/isEqual";
 import { render } from "../utils/render";
+import { Block } from "./Block";
 
-type ClassRef = new (attributes: {}, props: {}) => IBlock;
+type ClassRef = new (attributes: Record<string, unknown>, props: Record<string, unknown>) => IBlock;
+
+type children = { query: string; block: Block };
+
+interface IBlockProps {
+  childrens?: children[];
+  [key: string]: any;
+}
 
 interface IBlock {
   hide: () => void;
   show: () => void;
   getContent: () => HTMLElement;
+  setProps(nextProps: IBlockProps): void;
 }
 
 export class Route {
   _pathname: string;
+
   _blockClass: ClassRef;
+
   _block: IBlock;
+
   _props: Record<string, any>;
+
   constructor(pathname: string, view: ClassRef, props: Record<string, any>) {
     this._pathname = pathname;
     this._blockClass = view;
@@ -21,24 +34,32 @@ export class Route {
     this._props = props;
   }
 
-  navigate(pathname: string) {
+  navigate(pathname: string): void {
     if (this.match(pathname)) {
       this._pathname = pathname;
       this.render();
     }
   }
 
-  leave() {
+  leave(): void {
     if (this._block) {
       this._block.hide();
     }
   }
 
-  match(pathname) {
+  setProps(nextProps: IBlockProps): void {
+    if (!nextProps) {
+      return;
+    }
+
+    Object.assign(this._props, nextProps);
+  }
+
+  match(pathname: string): boolean {
     return isEqual(pathname, this._pathname);
   }
 
-  render() {
+  render(): void {
     if (!this._block) {
       const { rootQuery, ...restProps } = this._props;
 

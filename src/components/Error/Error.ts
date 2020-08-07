@@ -2,7 +2,7 @@ import { Block } from "../../modules/Block";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 interface IError {
   ecode: number;
@@ -13,7 +13,8 @@ class Error extends Block {
   constructor(props: IError) {
     super(props, { tagName: "div", className: "error-page" });
   }
-  render() {
+
+  render():string {
     return template(this.props);
   }
 }

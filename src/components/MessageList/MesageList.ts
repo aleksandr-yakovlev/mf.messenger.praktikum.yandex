@@ -2,18 +2,19 @@ import { Block } from "../../modules/Block";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 class MessageList extends Block {
-  constructor(props?) {
+  constructor(props?: Record<string, unknown>) {
     super(props, { tagName: "div", className: "message-list" });
   }
-  componentDidMount() {
+
+  componentDidMount(): void {
     this.getContent()
       .querySelector("#message-text")
-      .addEventListener("keypress", function (e: KeyboardEvent) {
-        let target = <HTMLInputElement>e.target;
-        if (e.which == 13 && !e.shiftKey && target.value.trim()) {
+      .addEventListener("keypress", (e: KeyboardEvent) => {
+        const target = <HTMLInputElement>e.target;
+        if (e.which === 13 && !e.shiftKey && target.value.trim()) {
           if (/<script>/.test(target.value)) {
             alert("Сообщение не может содержать «<script>»");
           } else {
@@ -24,7 +25,8 @@ class MessageList extends Block {
         }
       });
   }
-  render() {
+
+  render(): string {
     return template(this.props);
   }
 }

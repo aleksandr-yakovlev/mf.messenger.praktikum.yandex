@@ -4,10 +4,7 @@ interface IBlock {
   getContent: () => HTMLElement;
 }
 
-export const render = (query: string, block: IBlock, element = document) => {
+export const render = (query: string, block: IBlock, element = document):HTMLElement => {
   const root = element.querySelector(query);
-  if (root) {
-    root.appendChild(block.getContent());
-    return root;
-  }
+  return root? root.appendChild(block.getContent()):block.getContent()
 };

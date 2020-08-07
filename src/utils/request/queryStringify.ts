@@ -1,10 +1,9 @@
-export const queryStringify = (obj: object): string => {
-  let params = new URLSearchParams();
-  let pairs: string[] = [];
+export const queryStringify = (obj: Record<string, unknown>): string => {
+  const params = new URLSearchParams();
 
-  for (const [key, value] of Object.entries(obj)) {
-    params.append(key, value);
-  }
+  Object.keys(obj).forEach((key) => {
+    params.append(key, obj[key].toString());
+  });
 
   return params.toString();
 };

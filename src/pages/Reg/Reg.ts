@@ -14,7 +14,7 @@ const ctx = {
       placeholder: "Почта",
     },
     {
-      name: "uname",
+      name: "login",
       type: "text",
       size: "30",
       required: true,
@@ -22,13 +22,28 @@ const ctx = {
       pattern: "^[a-zA-Z]+$",
     },
     {
-      name: "pwd",
+      name: "first_name",
+      type: "text",
+      size: "30",
+      required: true,
+      placeholder: "Имя",
+      pattern: "^[а-яА-Я]+$",
+    },
+    {
+      name: "second_name",
+      type: "text",
+      size: "30",
+      required: true,
+      placeholder: "Фамилия",
+      pattern: "^[а-яА-Я]+$",
+    },
+    {
+      name: "password",
       type: "password",
       size: "30",
       required: true,
       placeholder: "Пароль",
-      pattern:
-        "^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&*])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$",
+      pattern: "^[a-zA-Z]+$",
     },
     {
       name: "confirm_pwd",
@@ -41,12 +56,25 @@ const ctx = {
 };
 
 export class RegPage extends Block {
-  render() {
+  componentDidMount(): void {
+    const form = <HTMLFormElement>this.getContent().querySelector("#form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const object = {};
+      new FormData(form).forEach((value, key) => {
+        object[key] = value;
+      });
+      await this.props.auth({
+        ...object,
+        phone: "+7945456545",
+      });
+    });
+  }
+
+  render(): HTMLElement {
     const Layout = new MainFormLayout();
     const LoginForm = new Form(ctx);
-    Layout.getContent()
-      .querySelector("#main-form")
-      .appendChild(LoginForm.getContent());
+    Layout.getContent().querySelector("#main-form").appendChild(LoginForm.getContent());
     return Layout.getContent();
   }
 }

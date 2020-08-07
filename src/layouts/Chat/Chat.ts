@@ -2,13 +2,14 @@ import { Block } from "../../modules/Block";
 
 import "./styles.css";
 
-const template = require("./template.hbs");
+import * as template from "./template.hbs";
 
 class ChatLayout extends Block {
-  constructor(props?) {
+  constructor(props?:Record<string,unknown>) {
     super(props, { tagName: "div", className: "chat" });
   }
-  render() {
+  
+  render():string {
     return template(this.props);
   }
 }

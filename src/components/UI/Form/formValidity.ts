@@ -8,51 +8,46 @@ const getCustomValidity = (input: HTMLInputElement): string => {
   return (input.value && message[input.pattern]) || "Необходимо заполнить";
 };
 
-const validatePassword = (
-  pwd: HTMLInputElement,
-  confirm_pwd: HTMLInputElement
-): void => {
-  if (confirm_pwd.value !== pwd.value) {
-    confirm_pwd.setCustomValidity("Пароли не совпадают");
-    confirm_pwd.classList.add("error");
-    confirm_pwd.reportValidity();
+const validatePassword = (pwd: HTMLInputElement, confirmPwd: HTMLInputElement): void => {
+  if (confirmPwd.value !== pwd.value) {
+    confirmPwd.setCustomValidity("Пароли не совпадают");
+    confirmPwd.classList.add("error");
+    confirmPwd.reportValidity();
   } else {
-    confirm_pwd.setCustomValidity("");
-    confirm_pwd.classList.remove("error");
+    confirmPwd.setCustomValidity("");
+    confirmPwd.classList.remove("error");
   }
 };
 
 export const formValidity = (form: HTMLFormElement): void => {
-  [...form.getElementsByTagName("INPUT")].forEach(
-    (element: HTMLInputElement) => {
-      if (element.name === "confirm_pwd") {
-        const pwd: HTMLInputElement = form.querySelector("#pwd");
-        if (pwd) {
-          const validate = () => validatePassword(pwd, element);
-          pwd.onblur = validate;
-          element.onkeyup = validate;
-        }
-      } else {
-        element.oninvalid = function () {
-          element.setCustomValidity(getCustomValidity(element));
-        };
-        element.oninput = function () {
-          element.setCustomValidity("");
-        };
-        element.onblur = function () {
-          element.reportValidity();
-        };
+  [...form.getElementsByTagName("INPUT")].forEach((el: HTMLInputElement) => {
+    const element = el;
+    if (element.name === "confirmPwd") {
+      const pwd: HTMLInputElement = form.querySelector("#pwd");
+      if (pwd) {
+        const validate = () => validatePassword(pwd, element);
+        pwd.onblur = validate;
+        element.onkeyup = validate;
       }
-      element.onchange = function () {
-        if (element.checkValidity() && !element.classList.contains("error")) {
-          console.log(
-            [...form.elements].filter(
-              (input: HTMLInputElement) =>
-                input.type !== "submit" && input.value
-            )
-          );
-        }
+    } else {
+      element.oninvalid = () => {
+        element.setCustomValidity(getCustomValidity(element));
+      };
+      element.oninput = () => {
+        element.setCustomValidity("");
+      };
+      element.onblur = () => {
+        element.reportValidity();
       };
     }
-  );
+    element.onchange = () => {
+      if (element.checkValidity() && !element.classList.contains("error")) {
+        console.log(
+          [...form.elements].filter(
+            (input: HTMLInputElement) => input.type !== "submit" && input.value
+          )
+        );
+      }
+    };
+  });
 };
