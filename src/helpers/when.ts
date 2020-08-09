@@ -1,3 +1,5 @@
+import * as hbs from "handlebars";
+
 // хелпер для условного рендеринга шаблона
 
 enum eOperators {
@@ -8,7 +10,7 @@ module.exports = (
   v1: string | number,
   operator: eOperators,
   v2: string | number,
-  options: Record<any, any>
+  options: hbs.HelperOptions
 ) => {
   const operators = {
     [eOperators.eq]: (left: string | number, right: string | number) => {

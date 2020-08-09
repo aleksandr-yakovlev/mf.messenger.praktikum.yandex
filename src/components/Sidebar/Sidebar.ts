@@ -5,40 +5,40 @@ import "./styles.css";
 import * as template from "./template.hbs";
 
 interface ISidebar {
-  chats?: Record<string,unknown>[];
+  chats?: Record<string, unknown>[];
   selected?: string;
-  chatHandler?: (id: string, self:Sidebar) => () => void;
+  chatHandler?: (id: string, self: Sidebar) => () => void;
 }
 
-const setChatHandler = (chatHandler: (id: string,self:Sidebar) => () => void , self:Sidebar) => {
+const setChatHandler = (chatHandler: (id: string, self: Sidebar) => () => void, self: Sidebar) => {
   const elements = self.getContent().getElementsByClassName("main-chat-card");
-  for (let i = 0; i < elements.length; i+=1) {
-   (<HTMLElement>elements[i]).addEventListener("click", chatHandler(elements[i].id,self));
+  for (let i = 0; i < elements.length; i += 1) {
+    (<HTMLElement>elements[i]).addEventListener("click", chatHandler(elements[i].id, self));
   }
-}
+};
 
 class Sidebar extends Block {
   constructor(props?: ISidebar) {
     super(props, { tagName: "aside", className: "main-sidebar" });
   }
 
-  componentDidMount():void {
-    const { chatHandler } = this.props;
+  componentDidMount(): void {
+    const { chatHandler } = <ISidebar>this.props;
     if (chatHandler) {
-      setChatHandler(chatHandler,this)
+      setChatHandler(chatHandler, this);
     }
   }
 
-  componentDidUpdate():void {
-    const { chatHandler } = this.props;
+  componentDidUpdate(): void {
+    const { chatHandler } = <ISidebar>this.props;
     if (chatHandler) {
-      setChatHandler(chatHandler,this)
+      setChatHandler(chatHandler, this);
     }
   }
 
-  render():string {
+  render(): string {
     const { chats, selected } = this.props;
-    return template({ chats,selected });
+    return template({ chats, selected });
   }
 }
 

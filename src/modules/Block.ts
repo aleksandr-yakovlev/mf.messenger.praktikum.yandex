@@ -13,7 +13,6 @@ type children = { query: string; block: Block };
 
 interface IBlockProps {
   childrens?: children[];
-  [key: string]: any;
 }
 
 export class Block {

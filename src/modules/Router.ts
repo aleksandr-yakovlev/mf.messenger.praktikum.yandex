@@ -5,7 +5,7 @@ type children = { query: string; block: Block };
 
 interface IBlockProps {
   childrens?: children[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface IBlock {
