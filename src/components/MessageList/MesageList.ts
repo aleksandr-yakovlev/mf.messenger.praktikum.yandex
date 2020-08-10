@@ -4,8 +4,16 @@ import "./styles.css";
 
 import * as template from "./template.hbs";
 
-class MessageList extends Block {
-  constructor(props?: Record<string, unknown>) {
+interface IMessageList {
+  messages: {
+    uname: string;
+    text: string;
+    timestamp: string;
+  };
+}
+
+class MessageList extends Block<IMessageList> {
+  constructor(props?: IMessageList) {
     super(props, { tagName: "div", className: "message-list" });
   }
 

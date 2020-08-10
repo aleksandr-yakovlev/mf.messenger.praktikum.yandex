@@ -17,20 +17,20 @@ const setChatHandler = (chatHandler: (id: string, self: Sidebar) => () => void, 
   }
 };
 
-class Sidebar extends Block {
+class Sidebar extends Block<ISidebar> {
   constructor(props?: ISidebar) {
     super(props, { tagName: "aside", className: "main-sidebar" });
   }
 
   componentDidMount(): void {
-    const { chatHandler } = <ISidebar>this.props;
+    const { chatHandler } = this.props;
     if (chatHandler) {
       setChatHandler(chatHandler, this);
     }
   }
 
   componentDidUpdate(): void {
-    const { chatHandler } = <ISidebar>this.props;
+    const { chatHandler } = this.props;
     if (chatHandler) {
       setChatHandler(chatHandler, this);
     }

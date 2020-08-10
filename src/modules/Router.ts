@@ -1,20 +1,6 @@
 import { Route } from "./Route";
 import { Block } from "./Block";
 
-type children = { query: string; block: Block };
-
-interface IBlockProps {
-  childrens?: children[];
-  [key: string]: unknown;
-}
-
-interface IBlock {
-  hide: () => void;
-  show: () => void;
-  getContent: () => HTMLElement;
-  setProps(nextProps: IBlockProps): void;
-}
-
 export class Router {
   routes: Route[];
 
@@ -63,7 +49,7 @@ export class Router {
     route.render();
   }
 
-  use(pathname: string, block: new () => IBlock, props?: Record<string, unknown>): Router {
+  use(pathname: string, block: new () => Block, props?: Record<string, unknown>): Router {
     const route = new Route(pathname, block, {
       rootQuery: this._rootQuery,
       ...props,

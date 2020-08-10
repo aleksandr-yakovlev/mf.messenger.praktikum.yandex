@@ -4,7 +4,7 @@ import { Block } from "./Block";
 
 type ClassRef = new (attributes: Record<string, unknown>, props: Record<string, unknown>) => IBlock;
 
-type children = { query: string; block: Block };
+type children = { query: string; block: Block<IBlockProps> };
 
 interface IBlockProps {
   childrens?: children[];

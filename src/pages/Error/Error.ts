@@ -1,8 +1,12 @@
 import { Block } from "../../modules/Block";
 import { Error } from "../../components/Error";
 
-export class ErrorPage extends Block {
-  constructor(props: { ecode: number } = { ecode: 500 }) {
+interface IErrorPage {
+  ecode: number;
+}
+
+export class ErrorPage extends Block<IErrorPage> {
+  constructor(props = { ecode: 500 }) {
     super(props);
   }
 

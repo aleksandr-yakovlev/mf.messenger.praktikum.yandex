@@ -13,7 +13,6 @@ export class ChatPage extends Block {
         MsgList.setProps({ messages: messages[id] });
         self.setProps({ selected: id });
       },
-
       ...sidebarCtx,
     });
     const Layout = new ChatLayout({

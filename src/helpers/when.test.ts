@@ -1,10 +1,11 @@
 import * as hbs from "handlebars";
-import * as button from "./button";
+import * as when from "./when";
 
-describe("./button", () => {
+describe("when helper", () => {
   it("должен регистрироваться хэлпер", () => {
-    hbs.registerHelper("button", <hbs.HelperDelegate>button);
-    const template = hbs.compile("{{button submit}}");
-    expect(template({ submit: "test" })).toBe('<input type="submit" value=test>');
+    hbs.registerHelper("when", <hbs.HelperDelegate>when);
+    const template = hbs.compile("{{#when 1 'eq' id}}selected{{/when}}");
+    expect(template({ id: 1 })).toBe("selected");
+    expect(template({ id: 2 })).toBe("");
   });
 });

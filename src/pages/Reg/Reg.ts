@@ -4,16 +4,28 @@ import { Form } from "../../components/UI/Form";
 
 import { ctx } from "./data";
 
-export class RegPage extends Block {
+type RegFieldsType = {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
+};
+
+interface IRegPage {
+  auth: (body: { phone: string } & RegFieldsType) => void;
+}
+
+export class RegPage extends Block<IRegPage> {
   componentDidMount(): void {
     const form = <HTMLFormElement>this.getContent().querySelector("#form");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const object = {};
+      let object: RegFieldsType;
       new FormData(form).forEach((value, key) => {
         object[key] = value;
       });
-      await this.props.auth({
+      this.props.auth({
         ...object,
         phone: "+7945456545",
       });
