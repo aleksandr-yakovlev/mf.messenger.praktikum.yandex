@@ -2,69 +2,30 @@ import { Block } from "../../modules/Block";
 import { MainFormLayout } from "../../layouts/MainForm";
 import { Form } from "../../components/UI/Form";
 
-const ctx = {
-  label: "Регистрация",
-  submit: "Зарегистрироваться",
-  inputs: [
-    {
-      name: "email",
-      type: "email",
-      size: "30",
-      required: true,
-      placeholder: "Почта",
-    },
-    {
-      name: "login",
-      type: "text",
-      size: "30",
-      required: true,
-      placeholder: "Логин",
-      pattern: "^[a-zA-Z]+$",
-    },
-    {
-      name: "first_name",
-      type: "text",
-      size: "30",
-      required: true,
-      placeholder: "Имя",
-      pattern: "^[а-яА-Я]+$",
-    },
-    {
-      name: "second_name",
-      type: "text",
-      size: "30",
-      required: true,
-      placeholder: "Фамилия",
-      pattern: "^[а-яА-Я]+$",
-    },
-    {
-      name: "password",
-      type: "password",
-      size: "30",
-      required: true,
-      placeholder: "Пароль",
-      pattern: "^[a-zA-Z]+$",
-    },
-    {
-      name: "confirm_pwd",
-      type: "password",
-      size: "30",
-      required: true,
-      placeholder: "Пароль еще раз",
-    },
-  ],
+import { ctx } from "./data";
+
+type RegFieldsType = {
+  first_name: string;
+  second_name: string;
+  login: string;
+  email: string;
+  password: string;
 };
 
-export class RegPage extends Block {
+interface IRegPage {
+  auth: (body: { phone: string } & RegFieldsType) => void;
+}
+
+export class RegPage extends Block<IRegPage> {
   componentDidMount(): void {
     const form = <HTMLFormElement>this.getContent().querySelector("#form");
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const object = {};
+      let object: RegFieldsType;
       new FormData(form).forEach((value, key) => {
         object[key] = value;
       });
-      await this.props.auth({
+      this.props.auth({
         ...object,
         phone: "+7945456545",
       });

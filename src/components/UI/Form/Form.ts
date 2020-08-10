@@ -19,16 +19,16 @@ interface IForm {
   inputs: InputType[];
 }
 
-export class Form extends Block {
+export class Form extends Block<IForm> {
   constructor(props: IForm) {
     super(props, { tagName: "form", className: "form", id: "form" });
   }
 
-  componentDidMount():void {
+  componentDidMount(): void {
     formValidity(this._element);
   }
 
-  render():string {
+  render(): string {
     return template(this.props);
   }
 }
