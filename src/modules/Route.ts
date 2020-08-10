@@ -4,11 +4,11 @@ import { Block } from "./Block";
 
 type ClassRef = new (attributes: Record<string, unknown>, props: Record<string, unknown>) => IBlock;
 
-type children = { query: string; block: Block };
+type children = { query: string; block: Block<IBlockProps> };
 
 interface IBlockProps {
   childrens?: children[];
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 interface IBlock {
@@ -25,9 +25,9 @@ export class Route {
 
   _block: IBlock;
 
-  _props: Record<string, any>;
+  _props: Record<string, unknown>;
 
-  constructor(pathname: string, view: ClassRef, props: Record<string, any>) {
+  constructor(pathname: string, view: ClassRef, props: Record<string, unknown>) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -67,7 +67,7 @@ export class Route {
         tagName: "div",
         className: "page",
       });
-      render(rootQuery, this._block);
+      render(<string>rootQuery, this._block);
 
       return;
     }

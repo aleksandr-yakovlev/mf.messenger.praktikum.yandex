@@ -23,14 +23,20 @@ const auth = async (body: {
   password: string;
   phone: string;
 }): Promise<void> => {
-  const res = await new HTTP().post(`${BASE_URL}/auth/signup`, body);
-  if (res.status === 200) {
-    state = { ...state, login: body.login };
-    if (router.getRoute("#chat")) {
-      router.getRoute("#chat").setProps({ login: state.login });
+  try {
+    const res = await new HTTP().post(`${BASE_URL}/auth/signup`, body);
+    if (res.status === 200) {
+      state = { ...state, login: body.login };
+      if (router.getRoute("#chat")) {
+        router.getRoute("#chat").setProps({ login: state.login });
+      }
+      router.go("#chat");
+    } else {
+      alert(res.status);
     }
-    router.go("#chat");
-  } else alert(res.responseText);
+  } catch {
+    router.go("#error/500");
+  }
 };
 
 class Index extends Block {
@@ -39,7 +45,7 @@ class Index extends Block {
     ul.classList.add("link");
     router.routes.forEach((route) => {
       const li = document.createElement("li");
-      li.innerText = route._pathname;
+      li.textContent = route._pathname;
       li.onclick = () => {
         router.go(route._pathname);
       };

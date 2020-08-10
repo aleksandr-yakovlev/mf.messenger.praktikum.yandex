@@ -9,15 +9,16 @@ enum Events {
   FLOW_RENDER = "flow:render",
 }
 
-type children = { query: string; block: Block };
+type children = { query: string; block: Block<IBlockProps> };
 
 interface IBlockProps {
   childrens?: children[];
-  [key: string]: any;
 }
 
-export class Block {
-  props: IBlockProps;
+type propsType<T> = T & IBlockProps;
+
+export class Block<T = IBlockProps> {
+  props: propsType<T>;
 
   eventBus: () => EventBus;
 
@@ -28,7 +29,7 @@ export class Block {
   _meta = null;
 
   constructor(
-    props = {},
+    props = <propsType<T>>{},
     attributes: { tagName: string; id?: string; className?: string } = {
       tagName: "div",
       className: "app",
@@ -91,7 +92,7 @@ export class Block {
     return true;
   }
 
-  setProps(nextProps: IBlockProps): void {
+  setProps(nextProps: propsType<T>): void {
     if (!nextProps) {
       return;
     }
@@ -124,7 +125,7 @@ export class Block {
     return this.element;
   }
 
-  private _makePropsProxy(props) {
+  private _makePropsProxy(props: propsType<T>) {
     const self = this;
 
     return new Proxy(props, {

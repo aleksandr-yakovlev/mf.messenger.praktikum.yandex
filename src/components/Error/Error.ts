@@ -9,12 +9,12 @@ interface IError {
   emessage: string;
 }
 
-class Error extends Block {
+class Error extends Block<IError> {
   constructor(props: IError) {
     super(props, { tagName: "div", className: "error-page" });
   }
 
-  render():string {
+  render(): string {
     return template(this.props);
   }
 }
