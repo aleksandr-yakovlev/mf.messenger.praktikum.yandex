@@ -31,8 +31,6 @@ const auth = async (body: {
         router.getRoute("#chat").setProps({ login: state.login });
       }
       router.go("#chat");
-    } else {
-      alert(res.status);
     }
   } catch {
     router.go("#error/500");
