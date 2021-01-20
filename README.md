@@ -3,7 +3,7 @@ Status](https://api.netlify.com/api/v1/badges/9aaef7de-1e5d-4fda-bc39-faa10a68b3
 
 ## Описание
 
-Мессенджер. Проектная работа Яндекс.Практикум мидл фронтенд разработчик.
+Мессенджер. Проектная работа Яндекс.Практикум мидл фронтенд разработчик. Второй проект курса, начатый после его перезапуска с целью изменения стека: отказа от React в сторону Vanilla.js, для детального изучения Virtual DOM и его реализации.
 
 - [Демо Netlify](https://mf-messenger.netlify.app/)
 - [Демо Heroku](https://mf-messenger-praktikum-yandex.herokuapp.com/)
